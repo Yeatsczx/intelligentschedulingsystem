@@ -9,6 +9,7 @@ import {
 import moment from 'moment'
 import Line from './line'
 import Bar from './bar'
+import welcome from '../../assets/images/welcome.164ddad4.png'
 import './home.less'
 
 const { RangePicker } = DatePicker
@@ -29,6 +30,9 @@ export default class Home extends Component {
 
     return (
       <div className='home'>
+        <div className='welcome'>
+          <img src={welcome} alt="" />
+        </div>
         {/* <Card
           className="home-card"
           title="商品总量"

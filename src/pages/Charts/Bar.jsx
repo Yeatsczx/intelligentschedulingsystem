@@ -51,14 +51,14 @@ export default class Bar extends Component {
         const { sales, stores } = this.state
         return (
             <div>
-                <Card>
+                {/* <Card>
                     <Button type='primary' onClick={this.update}>更新</Button>
                 </Card>
 
                 <Card title='柱状图一'>
                     <ReactEcharts option={this.getOption(sales, stores)} />
-                </Card>
-
+                </Card> */}
+                
             </div>
         )
     }

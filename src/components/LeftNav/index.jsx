@@ -36,8 +36,9 @@ export default function LeftNav() {
                     <Menu.Item key="/admin/category" icon={<PieChartOutlined />}><Link to='/admin/category'>品类管理</Link></Menu.Item>
                     <Menu.Item key="/admin/product-home" icon={<PieChartOutlined />}><Link to='/admin/product-home'>商品管理</Link></Menu.Item>
                 </SubMenu> */}
-                <Menu.Item key="/admin/user" icon={<DesktopOutlined />}><Link to='/admin/user'>用户管理</Link></Menu.Item>
-                <Menu.Item key="/admin/role" icon={<ContainerOutlined />}><Link to='/admin/role'>角色管理</Link></Menu.Item>
+                <Menu.Item key="/admin/user" icon={<DesktopOutlined />}><Link to='/admin/user'>零售门店管理</Link></Menu.Item>
+                <Menu.Item key="/admin/role" icon={<ContainerOutlined />}><Link to='/admin/role'>员工管理</Link></Menu.Item>
+                <Menu.Item key="/admin/bar" icon={<MailOutlined />}><Link to='/admin/bar'>门店排次表</Link></Menu.Item>
                 {/* <SubMenu key="sub2" icon={<MenuFoldOutlined />} title="图形图表">
                     <Menu.Item key="/admin/bar" icon={<MailOutlined />}><Link to='/admin/bar'>柱形图</Link></Menu.Item>
                     <Menu.Item key="/admin/line" icon={<MailOutlined />}><Link to='/admin/line'>折线图</Link></Menu.Item>

@@ -30,30 +30,31 @@ export default function Login() {
       <section className="login-content">
         <h2>用户登陆</h2>
         <Form onFinish={
-          async (values) => {
-            // 检验成功
-            // console.log('提交登陆的ajax请求', values)
-            // 请求登陆
-            const { username, password } = values
-            console.log(values);
-            const result = await reqLogin(username, password) // {status: 0, data: user}  {status: 1, msg: 'xxx'}
-            // console.log('请求成功', result)
-            if (result.status === 0) { // 登陆成功
-              // 提示登陆成功
-              message.success('登陆成功')
+          // async (values) => {
+          //   // 检验成功
+          //   // console.log('提交登陆的ajax请求', values)
+          //   // 请求登陆
+          //   const { username, password } = values
+          //   console.log(values);
+          //   const result = await reqLogin(username, password) // {status: 0, data: user}  {status: 1, msg: 'xxx'}
+          //   // console.log('请求成功', result)
+          //   if (result.status === 0) { // 登陆成功
+          //     // 提示登陆成功
+          //     message.success('登陆成功')
 
-              // 保存user
-              const user = result.data
+          //     // 保存user
+          //     const user = result.data
 
-              // 跳转到管理界面 (不需要再回退回到登陆)
-              navigate('/admin');
+          //     // 跳转到管理界面 (不需要再回退回到登陆)
+          //     navigate('/admin');
 
-            } else { // 登陆失败
-              // 提示错误信息
-              message.error(result.msg)
-            }
+          //   } else { // 登陆失败
+          //     // 提示错误信息
+          //     message.error(result.msg)
+          //   }
 
-          }
+          // }
+          ()=>navigate('/admin')
         } className="login-form" >
           <Item
             name="username" /* name必须写 */
