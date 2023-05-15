@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Card, Button, Space, Table, Tag, Modal, Form, Input } from 'antd';
+import axios from 'axios';
+import store from'../redux/store'
+import { json } from 'react-router-dom';
 
 export default class Role extends Component {
     state={
@@ -11,36 +14,38 @@ export default class Role extends Component {
         shop:'',
         preference:'',
         date: [
-        {
-            key: '1',
-            employeeName: 'John Brown',
-            position: 'Store manager',
-            telephone: 100121231231,
-            shop:'新都',
-            preference:'周一上班',
-        },
-        {
-            key: '2',
-            employeeName: 'Jim Green',
-            position: 'Store manager',
-            telephone: 101231230,
-            shop:'新都',
-            preference:'周四上班',
-        },
-        {
-            key: '3',
-            employeeName: 'Joe Black',
-            position: 'Store manager',
-            telephone: 100123123,
-            shop:'新都',
-            preference:'周五上班',
-        },
+        // {
+        //     key: '1',
+        //     employeeName: 'John Brown',
+        //     position: 'Store manager',
+        //     telephone: 100121231231,
+        //     shop:'新都',
+        //     preference:'周一上班',
+        // },
 ],
+    }
+    componentDidMount(){
+    let employeeInformationMap={};
+    // eslint-disable-next-line array-callback-return
+    this.overallData=store.getState();
+    let employeeInformationArray=this.overallData.flat(Infinity).filter(item=> {
+        if(!employeeInformationMap[item.employeeName]){
+            employeeInformationMap[item.employeeName]=true;
+            return true;
+        }
+        return false;
+    });
+
+    this.setState({...this.state,date:employeeInformationArray});
+    }
+    UNSAFE_componentWillUpdate(){
+        store.dispatch({type:'',data:this.overallData});
     }
   showModal = () => {
     this.setState({isModalOpen:true});
   };
   handleOk = () => {
+    let name,name1;
     if(this.state.index===-1){
         this.setState({
         ...this.state,
@@ -55,6 +60,7 @@ export default class Role extends Component {
         }
         else{
             let a=this.state.date;
+            name=a[this.state.index].employeeName;
             a[this.state.index]={
                 key:`${this.state.index+1}`,
                 employeeName: this.state.employeeName,
@@ -63,10 +69,21 @@ export default class Role extends Component {
                 shop:this.state.shop,
                 preference:this.state.preference,
             } 
+            name1=a[this.state.index].employeeName;
             this.setState({
         ...this.state,
         date:[...a],
         isModalOpen:false})}
+        for(let i=0;i<12;i++){
+        for(let j=0;j<this.overallData[i].length;j++){
+            this.overallData[i][j].forEach(item=>{
+                if(item.employeeName===name){
+                    item.employeeName=name1;
+                }
+            })
+        }
+    }
+    // console.log(JSON.stringify(this.overallData));
   };
 
   handleCancel = () => {
@@ -84,6 +101,7 @@ export default class Role extends Component {
         this.formDom.current.setFieldsValue({telephone:this.state.date[this.state.index].telephone});
         this.formDom.current.setFieldsValue({shop:this.state.date[this.state.index].shop});
         this.formDom.current.setFieldsValue({preference:this.state.date[this.state.index].preference});
+        this.setState({...this.state,employeeName:this.state.date[this.state.index].employeeName,position:this.state.date[this.state.index].position,telephone:this.state.date[this.state.index].telephone,shop:this.state.date[this.state.index].shop,preference:this.state.date[this.state.index].preference})
     });
     
   }
@@ -95,11 +113,24 @@ export default class Role extends Component {
         this.formDom.current.setFieldsValue({telephone:''});
         this.formDom.current.setFieldsValue({shop:''});
         this.formDom.current.setFieldsValue({preference:''});
+        this.setState({...this.state,employeeName:'',position:'',telephone:'',shop:'',preference:''})
         });
   }
   deleteStore=(event)=>{
     let a=this.state.date;
-    a.splice(Number(event.currentTarget.getAttribute("deletekey")),1);
+    let name=a.splice(Number(event.currentTarget.getAttribute("deletekey")),1)[0].employeeName;
+    for(let i=0;i<12;i++){
+        for(let j=0;j<this.overallData[i].length;j++){
+            let array=[];
+            this.overallData[i][j].forEach(item=>{
+                if(item.employeeName!==name){
+                    array.push(item);
+                }
+            });
+            this.overallData[i][j]=[...array];
+        }
+    }
+    // console.log(JSON.stringify(this.overallData));
     this.setState({
         ...this.state,
         date:[...a],
@@ -114,7 +145,7 @@ export default class Role extends Component {
             render: (text) => text,
         },
         {
-            title: '职位',
+            title: '住址',
             dataIndex: 'position',
             key: 'position',
         },
@@ -157,13 +188,14 @@ export default class Role extends Component {
                         确认
                     </Button>]}>
                         <Form
+                        labelAlign="left"
                         ref={this.formDom}
                             name="basic"
                             labelCol={{
-                                span: 8,
+                                span: 4,
                             }}
                             wrapperCol={{
-                                span: 16,
+                                span: 18,
                             }}
                             initialValues={{
                                 remember: true,

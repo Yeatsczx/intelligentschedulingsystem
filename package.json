@@ -20,14 +20,22 @@
     "echarts-for-react": "^3.0.2",
     "jsonp": "^0.2.1",
     "prop-types": "^15.8.1",
+    "pubsub-js": "^1.9.4",
     "react": "^18.0.0",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
+    "redux": "^4.2.1",
     "web-vitals": "^2.1.0"
   },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 4.0.0"
+  },
   "scripts": {
+    "analysis": "ca analysis",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
@@ -50,5 +58,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "ts-code-analysis": "^1.2.0"
   }
 }

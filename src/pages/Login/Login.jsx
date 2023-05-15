@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import {
   Form,
   Input,
@@ -54,7 +55,34 @@ export default function Login() {
           //   }
 
           // }
-          ()=>navigate('/admin')
+          async (values)=>{
+
+
+
+var config = {
+   method: 'post',
+   url: 'http://127.0.0.1:4523/m1/2409767-0-default/schedule/cache?weekid=<9>',
+   headers: { 
+      'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)'
+   }
+};
+
+axios(config)
+.then(function (response) {
+   console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+   console.log(error);
+});
+            const { username, password } = values;
+            if(username==='admin'&&password==="admin"){
+              message.success('登陆成功');
+              navigate('/admin');
+            }
+            else{
+              message.error('账号或密码错误');
+            }
+          }
         } className="login-form" >
           <Item
             name="username" /* name必须写 */
@@ -66,7 +94,7 @@ export default function Login() {
             ]}>
             <Input
               prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
+              placeholder="用户名"
             />
           </Item>
           <Form.Item
@@ -80,12 +108,12 @@ export default function Login() {
             <Input
               prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
               type="password"
-              placeholder="Password"
+              placeholder="密码"
             />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Log in
+              登录
             </Button>
           </Form.Item>
         </Form>

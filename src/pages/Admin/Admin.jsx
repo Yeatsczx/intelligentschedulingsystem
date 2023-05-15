@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 const { Footer, Sider, Content } = Layout;
 export default function Admin() {
   const Navigate = useNavigate();
+  
   return (<Layout style={{ width: '100%' }}>
     <Sider ><LeftNav /></Sider>
     <Layout>

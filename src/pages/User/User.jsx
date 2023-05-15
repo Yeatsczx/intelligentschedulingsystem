@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button, Space, Table, Tag, Modal, Form, Input } from 'antd';
+import axios from 'axios'
 import './user.less'
 
 export default class User extends Component {
@@ -12,24 +13,47 @@ export default class User extends Component {
         date: [
         {
             key: '1',
-            storeName: 'John Brown',
-            address: 'New York No. 1 Lake Park',
+            storeName: '中国石油西南石油大学科技园加油站',
+            address: '成都市新都区鸿运大道东段301号',
             area: 100,
         },
         {
             key: '2',
-            storeName: 'Jim Green',
-            address: 'London No. 1 Lake Park',
-            area: 1004,
+            storeName: '中国石油新都天府加油站',
+            address: '成都市新都区新都街道新东村5社',
+            area: 280,
         },
         {
             key: '3',
-            storeName: 'Joe Black',
-            address: 'Sidney No. 1 Lake Park',
-            area: 124,
+            storeName: '红旗连锁',
+            address: '成都市成华区成华大道',
+            area: 215,
         },
 ],
     }
+    // componentDidMount(){
+    // let config = {
+    // method: 'get',
+    // url: 'http://127.0.0.1:4523/m1/2409767-0-default/shop/page/1',
+    // headers: { 
+    //     'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)'
+    // }
+    // };
+    // let that=this;
+    // axios(config)
+    // .then(function (response) {
+    // let requestedData=response.data.data.slice(0,3);
+    // let requestedData1=requestedData.map(item=>{
+    //     return {
+    //         key: item.id,
+    //         storeName: item.shopName,
+    //         address: item.address,
+    //         area: Number(item.size)
+    //     };
+    // });
+    // that.setState({...that.state,date:requestedData1});
+    // })
+    // }
   showModal = () => {
     this.setState({isModalOpen:true});
   };
@@ -68,6 +92,7 @@ export default class User extends Component {
         this.formDom.current.setFieldsValue({storeName:this.state.date[this.state.index].storeName});
         this.formDom.current.setFieldsValue({address:this.state.date[this.state.index].address});
         this.formDom.current.setFieldsValue({area:this.state.date[this.state.index].area});
+        this.setState({...this.state,storeName:this.state.date[this.state.index].storeName,address:this.state.date[this.state.index].address,area:this.state.date[this.state.index].area})
     });
     
   }
@@ -77,6 +102,7 @@ export default class User extends Component {
             this.formDom.current.setFieldsValue({storeName:''});
             this.formDom.current.setFieldsValue({address:''});
             this.formDom.current.setFieldsValue({area:''});
+        this.setState({...this.state,storeName:'',address:'',area:''});
         });
   }
   deleteStore=(event)=>{
@@ -105,21 +131,21 @@ export default class User extends Component {
             key: 'area',
             dataIndex: 'area',
         },
-        {
-            title: '操作',
-            key: 'action',
-            render: (text, record,index) => (
-            <Space size="middle">
-                <a editkey={index} onClick={this.editStore}>编辑</a>
-                <a deletekey={index} onClick={this.deleteStore}>删除</a>
-            </Space>
-            ),
-        },
+        // {
+        //     title: '操作',
+        //     key: 'action',
+        //     render: (text, record,index) => (
+        //     <Space size="middle">
+        //         <a editkey={index} onClick={this.editStore}>编辑</a>
+        //         <a deletekey={index} onClick={this.deleteStore}>删除</a>
+        //     </Space>
+        //     ),
+        // },
 ];
         return (
             <div>
                 <Card>
-                    <Button type='primary' onClick={this.addStore} >新增门店</Button>
+                    {/* <Button type='primary' onClick={this.addStore} >新增门店</Button> */}
                     <Modal centered title="Basic Modal" open={this.state.isModalOpen} onOk={this.handleOk} onCancel={this.handleCancel} 
                     footer={[
                     <Button key="back" onClick={this.handleCancel}>
@@ -129,6 +155,7 @@ export default class User extends Component {
                         确认
                     </Button>]}>
                         <Form
+                        labelAlign="left"
                         ref={this.formDom}
                             name="basic"
                             labelCol={{
@@ -183,7 +210,7 @@ export default class User extends Component {
                             </Form>
                     </Modal>
                 </Card>
-                <Table columns={columns} dataSource={this.state.date} />
+                <Table  columns={columns} dataSource={this.state.date} />
             </div>
         )
     }
