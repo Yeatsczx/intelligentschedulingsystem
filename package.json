@@ -60,6 +60,6 @@
     ]
   },
   "devDependencies": {
-    "ts-code-analysis": "^1.2.0"
+    "ts-code-analysis": "^1.4.0"
   }
 }

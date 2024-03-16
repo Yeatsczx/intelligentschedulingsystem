@@ -131,20 +131,21 @@ export default class User extends Component {
             key: 'area',
             dataIndex: 'area',
         },
-        // {
-        //     title: '操作',
-        //     key: 'action',
-        //     render: (text, record,index) => (
-        //     <Space size="middle">
-        //         <a editkey={index} onClick={this.editStore}>编辑</a>
-        //         <a deletekey={index} onClick={this.deleteStore}>删除</a>
-        //     </Space>
-        //     ),
-        // },
+        {
+            title: '操作',
+            key: 'action',
+            render: (text, record,index) => (
+            <Space size="middle">
+                <a editkey={index} onClick={this.editStore}>编辑</a>
+                <a deletekey={index} onClick={this.deleteStore}>删除</a>
+            </Space>
+            ),
+        },
 ];
         return (
             <div>
                 <Card>
+                    <Button type='primary' onClick={this.addStore} >新增门店</Button>
                     {/* <Button type='primary' onClick={this.addStore} >新增门店</Button> */}
                     <Modal centered title="Basic Modal" open={this.state.isModalOpen} onOk={this.handleOk} onCancel={this.handleCancel} 
                     footer={[

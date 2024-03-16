@@ -30,6 +30,12 @@ export default function Login() {
       </header>
       <section className="login-content">
         <h2>用户登陆</h2>
+        <select name="" className='quanxian'>
+          <option value="0">请选择身份</option>
+          <option value="1" >中国石油西南石油大学科技园加油站排班表</option>
+          <option value="2">中国石油新都天府加油站员工排班表</option>
+          <option value="3">红旗连锁门店员工排班表</option>
+        </select>
         <Form onFinish={
           // async (values) => {
           //   // 检验成功
